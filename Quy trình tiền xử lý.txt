@@ -1,0 +1,42 @@
+Quy trình tiền xử lý:
+Xóa null items
+Xóa duplicate records
+
+Xét từng cột: 
+--1. address: 
++ phân ra thành đường, phường, quận, thành phố
++ đối với thành phố: xóa ký tự numeric
+--2. phone:
++ Xóa tất cả các ký tự đặc biệt nằm trước số đt
++ Cắt dấu cộng trước số đt đi, nếu không có để nguyên
++ Xóa dấu cách giữa các số đt cho dễ check độ dài
++ Đối với những số có 84 đứng đầu -> xóa  84 đi
++ Đối với những số có độ dài =9 hoặc > 9 => hợp lệ
++ Đối với 
++ Đối với null: note lại là có thể liên lạc qua địa chỉ cửa hàng
++ thêm +84 phía trước những số đt không có +84
+--3. timeOpen 
++Đối với records note Đang đóng cửa - xem tất cả các giờ -> check lại trang rồi làm thủ công
++Đối với null, có thể liên hệ qua số điện thoại để biết giờ mở cửa
++Lọc ra sao cho có thể phân tích được nhà hàng thường mở cửa vào giờ nào -> tiện cho consult
+
+--4. ratingAverage
++ Đổi thẳng qua kiểu float
+
+--5. priceRange
++ Đối với mục này, nhiều cột bị cào lẫn qua bên details nên một số details lẫn qua đây => lọc tất cả các ký tự không phải số trừ đơn vị tính đ và gán cho nó là Giá ở menu tại nhà hàng
++ Nhiều đơn giá bị nhiễu => ví dụ 130đ - 150đ -> thêm 3 số 0 
+một số khác 5 ₫ - 10 ₫ ******* nói chung chia sao cho hợp lí tùy vào số chữ số (có trên mạng)
+--6.details
++ Lọc các records có nhiễu (lẫn giá)
++ Các records có null thì ghi Không có mô tả
+
+ĐOẠN VẼ CHART
+bỏ mô tả, chỉ có 3 cái cần thiết 
+
+a2d69c07-bbbc-4bcb-98a2-665cc8ef73a9
+
+
+
+
+

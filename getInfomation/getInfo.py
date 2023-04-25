@@ -56,4 +56,4 @@ for link in all_links:
     row = {'name': name, 'address': address, 'phone': phone, 'timeOpen': timeOpen, 'ratingAverage': ratingAverage, 'priceRange': priceRange, 'details': dt_list_str}
     restaurants.append(row)
 df = pd.concat([pd.DataFrame(restaurants)])
-df.to_csv('E:/Crawl Tripadvisor/InfomationRestaurants.csv', index=False)  
+df.to_csv('E:/Crawl Tripadvisor/InfomationRestaurants.csv', index=False) 
