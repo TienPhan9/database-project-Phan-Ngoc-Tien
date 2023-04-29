@@ -11,7 +11,7 @@ select * into temp from restaurant
 select row_number() over(order by name) as id, * into restaurant_copy from temp
 
 --
-select * from restaurant_copy
+select * from restaurant_copy 
 
 select id, name, details, 
 replace(substring(priceRange, 1, charindex(N'₫', priceRange)-2), '.', '') as minimum, 
@@ -297,11 +297,107 @@ select * from priceCook
 where len(minimum) > len(maximum) --check again
 
 -----------------------------
+select id, name, details, minimum, maximum,
+cast(minimum as bigint) as minimum_num, cast(maximum as bigint) as maximum_num
+into priceTemp
+from priceCook
 
 
+--with minimum < 100k
 
+alter table priceTemp
+add rangePrice varchar(50)
 
+update priceTemp
+set rangePrice = '20.000 vnd - 99.000 vnd'
+where minimum_num<100000 and maximum <100000
 
+update priceTemp
+set rangePrice = cast((select
+avg((maximum_num - minimum_num)/2)
+from priceTemp
+where minimum_num < 100000 and (maximum_num between 100000 and 500000 )) as varchar)
++ ' vnd'+ ' - ' + '500.000 vnd'
+where minimum_num < 100000 and (maximum_num between 100000 and 500000 )
+
+update priceTemp
+set rangePrice = cast((select
+avg((maximum_num - minimum_num)/2)
+from priceTemp
+where minimum_num < 100000 and (maximum_num between 500000 and 1000000 )
+and rangePrice is null) as varchar)
++ ' vnd'+ ' - ' + '1.000.000 vnd'
+where minimum_num < 100000 and (maximum_num between 500000 and 1000000 )
+and rangePrice is null
+update priceTemp
+set rangePrice = cast((select
+avg((maximum_num - minimum_num)/2)
+from priceTemp
+where minimum_num < 100000 and (maximum_num > 1000000 )
+and rangePrice is null) as varchar)
++ ' vnd'+ ' - ' + '5.000.000 vnd'
+where minimum_num < 100000 and (maximum_num > 1000000 )
+and rangePrice is null
+
+update priceTemp
+set rangePrice = cast((select
+avg((maximum_num - minimum_num)/2)
+from priceTemp
+where (minimum_num between 100000 and 500000) and (maximum_num between 100000 and 500000 )
+and rangePrice is null) as varchar)
++ ' vnd'+ ' - ' + '500.000 vnd'
+where (minimum_num between 100000 and 500000) and (maximum_num between 100000 and 500000 )
+and rangePrice is null
+
+update priceTemp
+set rangePrice = cast((select
+avg((maximum_num - minimum_num)/2)
+from priceTemp
+where (minimum_num between 100000 and 500000) and (maximum_num between 500000 and 1000000 )
+and rangePrice is null) as varchar)
++ ' vnd'+ ' - ' + '1.000.000 vnd'
+where (minimum_num between 100000 and 500000) and (maximum_num between 500000 and 1000000 )
+and rangePrice is null
+
+update priceTemp
+set rangePrice = '5.000.000 vnd - 30.000.000 vnd'
+where (minimum_num >1000000) and (maximum_num >10000000 )
+
+update priceTemp 
+set rangePrice = '1.000.000 vnd - 10.000.000 vnd' 
+where maximum_num between 5000000 and 10000000
+and rangePrice is null
+
+update priceTemp 
+set rangePrice = '500.000 vnd - 1.000.000 vnd' 
+where rangePrice is null
+
+select *, len(rangePrice) from priceTemp 
+order by len(rangePrice)
+
+update priceTemp
+set rangePrice = '100.000 vnd - 400.000 vnd'
+where len(rangePrice) = 24 
+
+update priceTemp
+set rangePrice = '400.000 vnd - 700.000 vnd'
+where rangePrice = '400.000 vnd - 1.000.000 vnd'
+
+update priceTemp
+set rangePrice = '700.000 vnd - 1.000.000 vnd'
+where rangePrice = '500.000 vnd - 1.000.000 vnd'
+
+------------------->DONE-------------------------
+
+select restaurant_copy.id, restaurant_copy.name, address, 
+phone, timeOpen, ratingAverage, restaurant_copy.details, rangePrice 
+into tired
+from restaurant_copy 
+inner join priceTemp on restaurant_copy.id = priceTemp.id
+
+/*after this command, i export to file csv through some stages:
+export database name tired to file xls to secure, after that save file xls as xlsx and put it into colab
+to export to file csv because it fulfill of packages of python ( do not use vscode )*/
 
 
 
