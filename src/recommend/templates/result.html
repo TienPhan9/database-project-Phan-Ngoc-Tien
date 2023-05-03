@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Restaurant Recommendations</title>
+	<style>
+		h1 {
+			font-family: 'Roboto', sans-serif;
+			font-size: 3em;
+			font-weight: bold;
+			text-align: center;
+			margin-top: 30px;
+			margin-bottom: 20px;
+			color: green;
+		}
+
+		table {
+			font-family: Arial, Helvetica, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		td, th {
+			border: 1px solid #ddd;
+			padding: 8px;
+		}
+
+		tr:nth-child(even){background-color: #f2f2f2;}
+
+		tr:hover {background-color: #ddd;}
+
+		th {
+			padding-top: 12px;
+			padding-bottom: 12px;
+			text-align: left;
+			background-color: #4CAF50;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<h1>Restaurants you should try</h1>
+	<table>
+		<tr>
+			<th>Restaurant ID</th>
+			<th>Name</th>
+			<th>Address</th>
+			<th>Phone Number</th>
+			<th>Price</th>
+		</tr>
+		{% for restaurant in restaurants.itertuples() %}
+		<tr>
+			<td>{{ restaurant.id }}</td>
+			<td>{{ restaurant.name }}</td>
+			<td>{{ restaurant.address }}</td>
+			<td>{{ restaurant.phone }}</td>
+			<td>{{ restaurant.rangePrice }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+</body>
+</html>

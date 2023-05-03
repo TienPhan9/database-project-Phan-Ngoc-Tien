@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .navbar {
+            background-color: transparent;
+        }
+
+        .jumbotron {
+            margin-top: 70px;
+            margin-bottom: 0;
+            background-color: rgba(255, 255, 255, 0.75);
+        }
+    </style>
+</head>
+<body>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Find the Perfect Restaurant</h1>
+            <p class="lead">Get personalized recommendations based on your preferences.</p>
+            <form class="form-inline" method="POST" action="/recommend">
+                <div class="form-group">
+                    <label for="user_input" class="sr-only">Enter descriptions of restaurants you want</label>
+                    <input type="text" class="form-control" id="user_input" name="user_input" placeholder="Enter your preferences...">
+                </div>
+                <div class="form-group">
+                    <select name="district" id="district" class="form-control">
+                        <option value="">Select district</option>
+                        {% for district in districts %}
+                            <option value="{{ district }}">{{ district }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>
