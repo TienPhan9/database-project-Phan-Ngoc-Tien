@@ -7,7 +7,7 @@ import re
 import matplotlib.pyplot as plt
 import pickle
 
-data = pd.read_csv('E:/Crawl Tripadvisor/data/official.csv')
+data = pd.read_csv('E:/Crawl Tripadvisor/data/s3_restaurant.csv')
 
 data_sample = data.sample(n=1800, random_state = 42)
 data_sample = data_sample.dropna()

@@ -2,7 +2,7 @@ from io import StringIO
 import pandas as pd
 import boto
 
-data = pd.read_csv('E:/Crawl Tripadvisor/data/geo_main.csv')
+data = pd.read_csv('E:/Crawl Tripadvisor/data/official.csv')
 
 s3 = boto.connect_s3('Private', 'Private')
 bucket = s3.get_bucket('data-aws-9')

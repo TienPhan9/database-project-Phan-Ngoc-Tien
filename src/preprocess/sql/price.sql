@@ -22,10 +22,10 @@ from restaurant_copy
 --where priceRange is not null
 order by len(priceRange)
 
--->xong phần outlier
+-->done outlier
 update priceCook
 set minimum = right(minimum,5), maximum = right(maximum, 6)
-where len(minimum)=10 or len(maximum) =10
+where len(minimum)=10 or len(maximum) =10	
 --after this command, minimum is cleaned, turning to maximum
 update priceCook
 set maximum = right(maximum, 7)
@@ -182,7 +182,7 @@ and details not like N'%Kiểu Việt%Kiểu Á%'
  and details not like N'%Cà phê%Kiểu Á%Kiểu Việt%') and 
 minimum is null
 
---with 
+--with Kiểu Âu
 update priceCook
 set minimum = (select cast(avg(cast(minimum as bigint)) as varchar) from priceCook
 where (details like N'%Kiểu Âu%' and details not like N'%Kiểu Nhật%' and details not like N'%Kiểu Mỹ%' and 
@@ -329,6 +329,7 @@ and rangePrice is null) as varchar)
 + ' vnd'+ ' - ' + '1.000.000 vnd'
 where minimum_num < 100000 and (maximum_num between 500000 and 1000000 )
 and rangePrice is null
+
 update priceTemp
 set rangePrice = cast((select
 avg((maximum_num - minimum_num)/2)

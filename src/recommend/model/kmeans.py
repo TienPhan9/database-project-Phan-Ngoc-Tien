@@ -37,7 +37,6 @@ for k in k_range:
 kmeans = KMeans(n_clusters=12, random_state=42)
 kmeans.fit(X)
 
-
 X = tfidf_vectorizer.transform(data['details'])
 X = scaler.transform(X.toarray())
 data['cluster'] = kmeans.predict(X)
@@ -64,13 +63,13 @@ user_cluster = kmeans.predict(user_vector)[0]
 recommended_restaurants = data[data['cluster'] == user_cluster].sort_values('ratingAverage', ascending=False)
 print(recommended_restaurants.head(10))
 
-with open('kmeans_model.pkl', 'wb') as f:
-    pickle.dump(kmeans, f)
+# with open('kmeans_model.pkl', 'wb') as f:
+#     pickle.dump(kmeans, f)
 
-with open('tfidf_vectorizer.pkl', 'wb') as f:
-    pickle.dump(tfidf_vectorizer, f)
+# with open('tfidf_vectorizer.pkl', 'wb') as f:
+#     pickle.dump(tfidf_vectorizer, f)
 
-with open('scaler.pkl','wb') as f:
-    pickle.dump(scaler, f)
+# with open('scaler.pkl','wb') as f:
+#     pickle.dump(scaler, f)
 
 
