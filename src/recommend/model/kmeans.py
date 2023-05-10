@@ -50,18 +50,18 @@ top_words = {}
 for i in range(len(kmeans.cluster_centers_)):
     center = kmeans.cluster_centers_[i]
     top_words[i] = [tfidf_vectorizer.get_feature_names_out()[ind] for ind in center.argsort()[-10:]]
-    # print(f'Top words for cluster {i}: {", ".join(top_words[i])}')
+    print(f'Top words for cluster {i}: {", ".join(top_words[i])}')
 
 # print(cluster_counts)
 # Recommend restaurants based on user input
-user_input = input('Nhập vào nhà hàng bạn muốn tìm:')
-user_input = user_input.lower()
-user_input = re.sub(r',', '', user_input)  
-user_vector = tfidf_vectorizer.transform([user_input])
-user_vector = scaler.transform(user_vector.toarray())
-user_cluster = kmeans.predict(user_vector)[0]
-recommended_restaurants = data[data['cluster'] == user_cluster].sort_values('ratingAverage', ascending=False)
-print(recommended_restaurants.head(10))
+# user_input = input('Nhập vào nhà hàng bạn muốn tìm:')
+# user_input = user_input.lower()
+# user_input = re.sub(r',', '', user_input)  
+# user_vector = tfidf_vectorizer.transform([user_input])
+# user_vector = scaler.transform(user_vector.toarray())
+# user_cluster = kmeans.predict(user_vector)[0]
+# recommended_restaurants = data[data['cluster'] == user_cluster].sort_values('ratingAverage', ascending=False)
+# print(recommended_restaurants.head(10))
 
 # with open('kmeans_model.pkl', 'wb') as f:
 #     pickle.dump(kmeans, f)
