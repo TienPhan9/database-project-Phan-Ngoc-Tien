@@ -1,6 +1,5 @@
 # TRIPADVISOR RECOMMENDATION
 
-[Website](https://www.tripadvisor.com.vn/)
 ```
 print('Hi there! This is my first personal mini project')
 ```
@@ -9,23 +8,24 @@ print('Hi there! This is my first personal mini project')
 
 
 
-###My responsibilities
+### My responsibilities
 
-  ***Crawling data***
-  Using BeautifulSoup to extract hyperlinks pages to extract all links each restaurants, after that, extracting all informations of each restaurants in Ho Chi Minh (name, address, phone, rating average, open time, details).
+  #### Crawling data
+  Using BeautifulSoup to extract hyperlinks pages from [this website](https://www.tripadvisor.com.vn/) to extract all links each restaurants, after that, extracting all informations of each restaurants in Ho Chi Minh (name, address, phone, rating average, open time, details).
+  
 ![example](data.png)
 
-  ***Preprocessing data***
+  #### Preprocessing data
 
-  **General columns**
+  ***General columns***
   + Remove duplicate restaurant (same restaurants with same address)
   + Remove null restaurant that does not have name and address.
   
-  **Detail column**
+  ***Detail column***
   + Fill the null value 
   + Filter the numeric values in this details column.
 
-  **PriceRange column**
+  ***PriceRange column***
   + Get the id for each restaurant ( unique value)
   + Remove the special character
   + Split minimum and maximum price to make it easy for manage price
@@ -35,22 +35,22 @@ print('Hi there! This is my first personal mini project')
   + Fill the null price base on type of details (type of foods like vietnam, euro, US,...)
   + Build a list of range price.
   
-  **Rating column**
+  ***Rating column***
   + With null records, refer to their details and observe types of them obviously, counting the average rating of all restaurants with similar types, then, adding those values into null values.
   + Convert data type to float
   + **Export data into file csv.**
   + **Continue to process data using Python: standardlizing location of restaurants**
   
-  ***Connecting to the cloud for storing (AWS S3)***
+  #### Connecting to the cloud for storing data (AWS S3)
   + As root user, using access key and buckets to store data as csv file.
   
-  ***Building K-Means model***
+  #### Building K-Means model
   + Re-preprocess data (basically)
   + Implementing TF-IDF method to extract features of texts (detail column)
   + Selecting k: after putting it to K elbow and visualize it, i absolutely choose K = 12 (the number of clusters is 12)
   ![example](k.png)
 
-  ***Generating a basic web application (Rest-API)***
+  #### Generating a basic web application (Rest-API)
   + Finally, after building Kmeans model, I deploy it to Rest-API to present model obviously.
 
 ![example](screen_new.png)
