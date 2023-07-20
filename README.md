@@ -9,13 +9,14 @@ print('Hi there! This is my first personal mini project')
 
 
 
-**My responsibilities**
+###My responsibilities
 
   ***Crawling data***
   Using BeautifulSoup to extract hyperlinks pages to extract all links each restaurants, after that, extracting all informations of each restaurants in Ho Chi Minh (name, address, phone, rating average, open time, details).
 ![example](data.png)
 
   ***Preprocessing data***
+
   **General columns**
   + Remove duplicate restaurant (same restaurants with same address)
   + Remove null restaurant that does not have name and address.
