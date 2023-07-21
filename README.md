@@ -4,7 +4,7 @@
 print('Hi there! This is my first personal mini project')
 ```
 ## Main workflow
-![example](diagram.png)
+![example](images/diagram.png)
 
 
 
@@ -13,7 +13,7 @@ print('Hi there! This is my first personal mini project')
   #### Crawling data
   Using BeautifulSoup to extract hyperlinks pages from [this website](https://www.tripadvisor.com.vn/) to extract all links each restaurants, after that, extracting all informations of each restaurants in Ho Chi Minh (name, address, phone, rating average, open time, details).
   
-![example](data.png)
+![example](images/data.png)
 
   #### Preprocessing data
 
@@ -48,14 +48,14 @@ print('Hi there! This is my first personal mini project')
   + Re-preprocess data (basically)
   + Implementing TF-IDF method to extract features of texts (detail column)
   + Selecting k: after putting it to K elbow and visualize it, i absolutely choose K = 12 (the number of clusters is 12)
-  ![example](k.png)
+  ![example](images/k.png)
 
   #### Generating a basic web application (Rest-API)
   + Finally, after building Kmeans model, I deploy it to Rest-API to present model obviously.
 
-![example](screen_new.png)
+![example](images/screen_new.png)
 
-![example](result_new.png)
+![example](images/result_new.png)
 
 
   
